@@ -59,9 +59,9 @@ limitations under the License.
 
 SevSeg sevseg; //Instantiate a seven segment controller object
 
-int Fen = 0;
+int Fen = 3;
 
-int Miao = 10;
+int Miao = 00;
 
 void setup()
 
@@ -94,16 +94,22 @@ void setup()
 }
 
 void loop() {
+  
  if(Fen>=0){
-  sevseg.setNumber(Fen * 100 + Miao,1); //设置要显示的数据，不显示小数点
-
+  static byte decPlace = 0;
+  sevseg.setNumber(Fen * 100 + Miao,decPlace); //设置要显示的数据，不显示小数点
+  decPlace++;
+  decPlace %= 3;
   sevseg.refreshDisplay(); // 必须重复运行刷新数码管显示
   
 }else{
+  static byte decPlace = 0;
   sevseg.setNumber(0000,0); //设置要显示的数据，不显示小数点
-
+  decPlace++;
+  decPlace %= 3;
   sevseg.refreshDisplay(); // 必须重复运行刷新数码管显示
-  tone(3,3000);
+
+  tone(3,1500);
   }
 }
 
@@ -124,3 +130,6 @@ void timerIsr()//定时器中断处理函数
     //Serial.print(Fen);
   
   
+  }
+
+}
