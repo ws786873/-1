@@ -121,6 +121,6 @@ void timerIsr()//定时器中断处理函数
     Miao = 59;
 
     Fen--;
-    Serial.print(Fen);
+    //Serial.print(Fen);
   
   
